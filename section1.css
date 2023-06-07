@@ -1,5 +1,8 @@
 body {
-  margin: 20px;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 @import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
