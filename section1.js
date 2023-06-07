@@ -68,4 +68,58 @@ let m = new THREE.PointsMaterial({
   depthTest: false,
   blending: THREE.AdditiveBlending,
   onBeforeCompile: (shader) => {
-    shader.uniforms
+    shader.uniforms.time = gu.time;
+    shader.vertexShader = `
+      uniform float time;
+      attribute float sizes;
+      attribute vec4 shift;
+      varying vec3 vColor;
+      ${shader.vertexShader}
+    `.replace(
+      `gl_PointSize = size;`,
+      `gl_PointSize = size * sizes;`
+    ).replace(
+      `#include <color_vertex>`,
+      `#include <color_vertex>
+        float d = length(abs(position) / vec3(40., 10., 40));
+        d = clamp(d, 0., 1.);
+        vColor = mix(vec3(227., 155., 0.), vec3(100., 50., 255.), d) / 255.;
+      `
+    ).replace(
+      `#include <begin_vertex>`,
+      `#include <begin_vertex>
+        float t = time;
+        float moveT = mod(shift.x + shift.z * t, PI2);
+        float moveS = mod(shift.y + shift.z * t, PI2);
+        transformed += vec3(cos(moveS) * sin(moveT), sin(moveS) * sin(moveT), cos(moveT)) * shift.w;
+      `
+    );
+    shader.fragmentShader = `
+      varying vec3 vColor;
+      ${shader.fragmentShader}
+    `.replace(
+      `#include <clipping_planes_fragment>`,
+      `#include <clipping_planes_fragment>
+        float d = length(gl_PointCoord.xy - 0.5);
+        //if (d > 0.5) discard;
+      `
+    ).replace(
+      `vec4 diffuseColor = vec4( diffuse, opacity );`,
+      `vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d)/* * 0.5 + 0.5*/ );`
+    );
+  },
+});
+let p = new THREE.Points(g, m);
+p.rotation.order = "ZYX";
+p.rotation.x = 0.2; // Rotate around the x-axis to start vertically
+scene.add(p);
+
+let clock = new THREE.Clock();
+
+renderer.setAnimationLoop(() => {
+  controls.update();
+  let t = clock.getElapsedTime() * 0.5;
+  gu.time.value = t * Math.PI;
+  p.rotation.y = t * 0.05;
+  renderer.render(scene, camera);
+});
