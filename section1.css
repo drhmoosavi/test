@@ -1,14 +1,16 @@
 @import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
-body{
+
+body {
   overflow: hidden;
   margin: 0;
 }
-#word{
-  font-family: Ink Free, cursive;
-  font-size: 600 px;
-  font-weight:650;
+
+#word {
+  font-family: "Ink Free", cursive;
+  font-size: 100px;
+  font-weight: 650;
   position: absolute;
-  margin: 10;
+  margin: 10px;
   /*bottom: 0;*/
   color: #fc0;
   -webkit-text-stroke: 0.15vh #c0f;
