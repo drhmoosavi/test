@@ -16,7 +16,7 @@ canvas {
 .mask {
   position: absolute;
   z-index: 2;
-  background: #0f1458;
+  background: white;
   height: 100vh;
   width: 100vw;
   mix-blend-mode: screen;
