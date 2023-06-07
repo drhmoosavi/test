@@ -3,6 +3,7 @@ body {
   height: 100%;
   overflow: hidden;
 background-color: #0f1458;
+  z-index: 1; /* Added z-index */
 }
 
 canvas {
