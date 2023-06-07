@@ -11,13 +11,15 @@ body{
   margin: 0;
 }
 #word{
-  font-family: Megrim, cursive;
+  font-family: Ink Free, cursive;
   font-size: 45px;
   font-weight:550;
   position: absolute;
   margin: 10;
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
   color:gold;
-  /*bottom: 0;*/
   color: #fc0;
   -webkit-text-stroke: 0.15vh #c0f;
 }
