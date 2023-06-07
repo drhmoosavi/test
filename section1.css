@@ -1,18 +1,14 @@
+@import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
+
 body {
-  margin: 0;
-  height: 100vh; /* Set the height to full viewport height */
   overflow: hidden;
+  margin: 0;
 }
 
-@import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
-body{
-  overflow: hidden;
-  margin: 0;
-}
-#word{
-  font-family: Ink Free, cursive;
+#word {
+  font-family: "Ink Free", cursive;
   font-size: 60px;
-  font-weight:550;
+  font-weight: 550;
   position: absolute;
   align-items: center;
   justify-content: center;
@@ -21,6 +17,5 @@ body{
   width: 50vw;
   position: relative;
   color: #fc0;
-  background-color: transparent;
   -webkit-text-stroke: 0.15vh #c0f;
 }
