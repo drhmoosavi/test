@@ -3,7 +3,6 @@ body {
   height: 100%;
   overflow: hidden;
 background-color: #0f1458;
-  z-index: 1; /* Added z-index */
 }
 
 canvas {
@@ -12,7 +11,6 @@ canvas {
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 0; /* Added z-index */
 }
 
 .mask {
