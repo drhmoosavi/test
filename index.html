@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll Sections</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="section1.css">
+  <link rel="stylesheet" type="text/css" href="section2.css">
+</head>
+<body>
+  <section id="section1">
+    <!-- Include the content of section1.html -->
+    <object data="section1.html" width="100%" height="100%"></object>
+  </section>
+
+  <section id="section2">
+    <!-- Include the content of section2.html -->
+    <object data="section2.html" width="100%" height="100%"></object>
+  </section>
+
+  <script src="section1.js"></script>
+  <script src="section2.js"></script>
+  <script>
+    const section1 = document.getElementById('section1');
+    const section2 = document.getElementById('section2');
+
+    section2.style.opacity = '0'; // Hide section2 initially
+
+window.addEventListener('scroll', () => {
+  const { scrollTop } = document.documentElement;
+
+  if (scrollTop < section1.offsetHeight) {
+    // Scroll position is within section 1
+    section1.style.opacity = '1'; // Show section1
+    section2.style.opacity = '0'; // Hide section2
+  } else {
+    // Scroll position is within section 2
+    section1.style.opacity = '0'; // Hide section1
+    section2.style.opacity = '1'; // Show section2
+  }
+});
+  </script>
+</body>
+</html>
