@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scroll Sections</title>
   <style>
-body {
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
 
     section {
       height: 100vh;
@@ -17,6 +17,32 @@ body {
       align-items: center;
       justify-content: center;
       font-size: 48px;
+      color: #fff;
+    }
+
+    .click-anywhere-button {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #000;
+      padding: 10px 20px;
+      font-size: 24px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .click-anywhere-button:hover {
+      background-color: #4c4c4c;
+    }
+
+    .neon-effect {
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #00ff00, 0 0 70px #00ff00, 0 0 80px #00ff00, 0 0 100px #00ff00, 0 0 150px #00ff00;
     }
   </style>
   <link rel="stylesheet" type="text/css" href="section1.css">
@@ -32,28 +58,36 @@ body {
     <!-- Include the content of section2.html -->
     <object data="section2.html" width="100%" height="100%"></object>
   </section>
-
   <script src="section1.js"></script>
   <script src="section2.js"></script>
+  <button class="click-anywhere-button neon-effect">Click Anywhere</button>
+
   <script>
     const section1 = document.getElementById('section1');
     const section2 = document.getElementById('section2');
+    const clickAnywhereButton = document.querySelector('.click-anywhere-button');
 
-    section2.style.opacity = '0'; // Hide section2 initially
+    window.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
 
-window.addEventListener('scroll', () => {
-  const { scrollTop } = document.documentElement;
+      if (section1.style.display === 'none') {
+        section1.style.display = 'flex';
+        section2.style.display = 'none';
+      } else {
+        section1.style.display = 'none';
+        section2.style.display = 'flex';
+      }
+    });
 
-  if (scrollTop < section1.offsetHeight) {
-    // Scroll position is within section 1
-    section1.style.opacity = '1'; // Show section1
-    section2.style.opacity = '0'; // Hide section2
-  } else {
-    // Scroll position is within section 2
-    section1.style.opacity = '0'; // Hide section1
-    section2.style.opacity = '1'; // Show section2
-  }
-});
+    clickAnywhereButton.addEventListener('click', () => {
+      if (section1.style.display === 'none') {
+        section1.style.display = 'flex';
+        section2.style.display = 'none';
+      } else {
+        section1.style.display = 'none';
+        section2.style.display = 'flex';
+      }
+    });
   </script>
 </body>
 </html>
