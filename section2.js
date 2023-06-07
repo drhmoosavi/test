@@ -7,7 +7,6 @@ var vertex = `
 				gl_Position = vec4(position, 0, 1);
 		}
 `;
-
 var fragment = `
 		precision highp float;
 		precision highp int;
@@ -47,7 +46,6 @@ var fragment = `
 			gl_FragColor = vec4(tex.r, tex2.g, tex3.b, 1.0);
 		}
 `;
-
 {
   var _size = [2048, 1638];
   var renderer = new ogl.Renderer({ dpr: 2 });
@@ -58,7 +56,6 @@ var fragment = `
   var aspect = 1;
   var mouse = new ogl.Vec2(-1);
   var velocity = new ogl.Vec2();
-
   function resize() {
     gl.canvas.width = window.innerWidth * 2.0;
     gl.canvas.height = window.innerHeight * 2.0;
@@ -75,39 +72,34 @@ var fragment = `
       a2 = 1;
     }
     mesh.program.uniforms.res.value = new ogl.Vec4(
-      window.innerWidth,
-      window.innerHeight,
-      a1,
-      a2
-    );
+    window.innerWidth,
+    window.innerHeight,
+    a1,
+    a2);
+
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     aspect = window.innerWidth / window.innerHeight;
   }
-
   var flowmap = new ogl.Flowmap(gl, {
     falloff: 0.3,
     dissipation: 0.92,
-    alpha: 0.5,
-  });
+    alpha: 0.5 });
 
   // Triangle that includes -1 to 1 range for 'position', and 0 to 1 range for 'uv'.
   var geometry = new ogl.Geometry(gl, {
     position: {
       size: 2,
-      data: new Float32Array([-1, -1, 3, -1, -1, 3]),
-    },
+      data: new Float32Array([-1, -1, 3, -1, -1, 3]) },
 
-    uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) },
-  });
+    uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) } });
 
   var texture = new ogl.Texture(gl, {
     minFilter: gl.LINEAR,
-    magFilter: gl.LINEAR,
-  });
+    magFilter: gl.LINEAR });
 
   var img = new Image();
-  img.onload = () => (texture.image = img);
+  img.onload = () => texture.image = img;
   img.crossOrigin = "Anonymous";
   img.src = "https://robindelaporte.fr/codepen/bg3.jpg";
 
@@ -128,15 +120,14 @@ var fragment = `
       uTime: { value: 0 },
       tWater: { value: texture },
       res: {
-        value: new ogl.Vec4(window.innerWidth, window.innerHeight, a1, a2),
-      },
+        value: new ogl.Vec4(window.innerWidth, window.innerHeight, a1, a2) },
+
       img: { value: new ogl.Vec2(_size[1], _size[0]) },
       // Note that the uniform is applied without using an object and value property
       // This is because the class alternates this texture between two render targets
       // and updates the value property after each render.
-      tFlow: flowmap.uniform,
-    },
-  });
+      tFlow: flowmap.uniform } });
+
 
   var mesh = new ogl.Mesh(gl, { geometry, program });
 
@@ -144,14 +135,13 @@ var fragment = `
   resize();
 
   // Create handlers to get mouse position and velocity
-  var isTouchCapable = "ontouchstart" in window;
+  var isTouchCapable = ("ontouchstart" in window);
   if (isTouchCapable) {
     window.addEventListener("touchstart", updateMouse, false);
     window.addEventListener("touchmove", updateMouse, { passive: false });
   } else {
     window.addEventListener("mousemove", updateMouse, false);
   }
-
   var lastTime;
   var lastMouse = new ogl.Vec2();
   function updateMouse(e) {
@@ -189,9 +179,7 @@ var fragment = `
     // Flag update to prevent hanging velocity values when not moving
     velocity.needsUpdate = true;
   }
-
   requestAnimationFrame(update);
-
   function update(t) {
     requestAnimationFrame(update);
     // Reset velocity when mouse not moving
