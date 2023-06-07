@@ -21,7 +21,7 @@ body{
   margin-right: auto;
   width: 50vw;
   position: relative;
-  color:gold;
   color: #fc0;
+  background-color: transparent;
   -webkit-text-stroke: 0.15vh #c0f;
 }
