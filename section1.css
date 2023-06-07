@@ -6,13 +6,12 @@ body {
 }
 
 #word {
-  font-family: "Ink Free", cursive;
+  font-family: "Ink Free";
   font-size: 50px;
   font-weight: 650;
   position: absolute;
   margin: 10;
   /* bottom: 0; */
-  color: transparent;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 3px #fc0;
  text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff69b4, 0 0 70px #ff69b4, 0 0 80px #ff69b4, 0 0 100px #ff69b4, 0 0 150px #ff69b4;
